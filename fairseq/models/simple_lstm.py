@@ -253,7 +253,7 @@ class SimpleLSTMDecoder(FairseqDecoder):
 # register here should take a single argument *args* and modify it in-place
 # to match the desired architecture.
 
-@register_model_architecture('simple_lstm', 'tutorial_simple_lstm')
+@register_model_architecture('simple_lstm', 'simple_lstm')
 def tutorial_simple_lstm(args):
     # We use ``getattr()`` to prioritize arguments that are explicitly given
     # on the command-line, so that the defaults defined below are only used
