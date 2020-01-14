@@ -19,11 +19,11 @@ labels = []
 predictions = []
 with open(os.path.join('names','test.input')) as infile:  # using `with open()` you do not need to do `infile.close()`, that is done for you.
     for line in infile:  # I
-        testdata.append(line)
+        testdata.append(line.strip())
 
 with open(os.path.join('names','test.label')) as infile:  # using `with open()` you do not need to do `infile.close()`, that is done for you.
     for line in infile:  # I
-        labels.append(line)
+        labels.append(line.strip())
 
 for d,l in zip(testdata,labels):
 
@@ -44,7 +44,8 @@ for d,l in zip(testdata,labels):
     # Feed batch to the model and get predictions
     preds = model(**batch['net_input'])
     top_scores, top_labels = preds[0].topk(k=2)
-    predictions.append(top_labels[0])    
+    label_name = task.target_dictionary.string([top_labels[0]])
+    predictions.append(label_name)    
 
 # calculate the metric 
 f1 = f1_score(labels, predictions, average='weighted')
