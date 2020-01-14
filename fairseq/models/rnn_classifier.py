@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from fairseq.models import BaseFairseqModel, register_model
+from fairseq.models import register_model_architecture
 
 class RNN(nn.Module):
 
@@ -103,4 +104,16 @@ class FairseqRNNClassifier(BaseFairseqModel):
 
         # Return the final output state for making a prediction
         return output
+
+# The first argument to ``register_model_architecture()`` should be the name
+# of the model we registered above (i.e., 'rnn_classifier'). The function we
+# register here should take a single argument *args* and modify it in-place
+# to match the desired architecture.
+
+@register_model_architecture('rnn_classifier', 'pytorch_tutorial_rnn')
+def pytorch_tutorial_rnn(args):
+    # We use ``getattr()`` to prioritize arguments that are explicitly given
+    # on the command-line, so that the defaults defined below are only used
+    # when no other value has been specified.
+    args.hidden_dim = getattr(args, 'hidden_dim', 128)
 
