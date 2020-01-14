@@ -47,5 +47,5 @@ for d,l in zip(testdata,labels):
     predictions.append(top_labels[0])    
 
 # calculate the metric 
-f1 = f1_score(labels, y_predictions, average='weighted')
+f1 = f1_score(labels, predictions, average='weighted')
 print("F1 score: {}".format(f1))
